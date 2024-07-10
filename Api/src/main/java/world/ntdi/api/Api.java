@@ -3,14 +3,18 @@ package world.ntdi.api;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
+import world.ntdi.api.hologram.Hologram;
 import world.ntdi.api.sql.database.PostgresqlDatabase;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public final class Api extends JavaPlugin {
     @Getter
     private static PostgresqlDatabase m_postgresqlDatabase;
+
 
     @Override
     public void onEnable() {
@@ -39,9 +43,16 @@ public final class Api extends JavaPlugin {
     @Override
     public void onDisable() {
         m_postgresqlDatabase.close();
+
+        if (!toBeDeleted.isEmpty()) {
+            toBeDeleted.forEach(Hologram::deleteHologram);
+        }
     }
 
     public static Api getInstance(){
         return (Api) Bukkit.getPluginManager().getPlugin("Api");
     }
+
+    public static List<Hologram> toBeDeleted = new ArrayList<>();
+
 }
