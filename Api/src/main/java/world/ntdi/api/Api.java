@@ -1,6 +1,7 @@
 package world.ntdi.api;
 
 import lombok.Getter;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import world.ntdi.api.sql.database.PostgresqlDatabase;
 
@@ -38,5 +39,9 @@ public final class Api extends JavaPlugin {
     @Override
     public void onDisable() {
         m_postgresqlDatabase.close();
+    }
+
+    public static Api getInstance(){
+        return (Api) Bukkit.getPluginManager().getPlugin("Api");
     }
 }
