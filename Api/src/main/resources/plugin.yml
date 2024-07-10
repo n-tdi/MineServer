@@ -1,0 +1,4 @@
+name: Api
+version: '${project.version}'
+main: world.ntdi.api.Api
+api-version: '1.21'

@@ -1,0 +1,4 @@
+name: Core
+version: '${project.version}'
+main: world.ntdi.core.Core
+api-version: '1.21'
