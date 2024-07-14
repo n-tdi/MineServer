@@ -29,6 +29,8 @@ public class PostgresqlDatabase {
         m_hikariConfig.setUsername(p_username);
         m_hikariConfig.setPassword(p_password);
 
+        m_hikariConfig.setDriverClassName("org.postgresql.Driver");
+
         this.m_hikariDataSource = new HikariDataSource(m_hikariConfig);
         this.m_connectionSource = new DataSourceConnectionSource(m_hikariDataSource, m_hikariConfig.getJdbcUrl());
     }
