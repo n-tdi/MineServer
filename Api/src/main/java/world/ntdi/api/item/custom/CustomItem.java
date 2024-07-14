@@ -28,7 +28,7 @@ public abstract class CustomItem implements Listener {
         m_title = p_title;
         m_description = p_description;
         m_material = p_material;
-        m_namespacedKey = new NamespacedKey("tazkaboom", m_id + m_title);
+        m_namespacedKey = new NamespacedKey("tazkaboom", m_id + "hehe");
 
         Bukkit.getServer().getPluginManager().registerEvents(this, Bukkit.getPluginManager().getPlugin("Api"));
     }

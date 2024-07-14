@@ -19,11 +19,11 @@ import java.util.Objects;
 public class MapServiceImpl implements MapService{
     private final HashSet<BlockPlaceholder> m_blocks = new HashSet<>();
     private final Cuboid m_cuboid = new Cuboid(Objects.requireNonNull(Bukkit.getWorld("world")),
-            -9, 134, -8, 9, 78, -26);
+            -9, 136, -9, 9, 78, -26);
 
     @Override
     public Location getSpawn() {
-        return new Location(Bukkit.getWorld("world"), 0.5, 135, 0.5);
+        return new Location(Bukkit.getWorld("world"), 0.5, 135, 0.5, -180, 0);
     }
 
     @Override
