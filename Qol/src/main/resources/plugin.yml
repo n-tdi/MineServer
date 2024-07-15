@@ -1,7 +1,0 @@
-name: Qol
-version: '${project.version}'
-main: world.ntdi.qol.Qol
-api-version: '1.21'
-depend:
-  - Api
-  - Core

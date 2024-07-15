@@ -1,4 +1,4 @@
-package world.ntdi.qol.listener;
+package world.ntdi.core.listener;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

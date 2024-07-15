@@ -11,7 +11,6 @@
     <modules>
         <module>Api</module>
         <module>Core</module>
-        <module>Qol</module>
     </modules>
 
     <properties>

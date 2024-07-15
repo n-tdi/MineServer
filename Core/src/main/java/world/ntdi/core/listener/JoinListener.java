@@ -1,6 +1,7 @@
 package world.ntdi.core.listener;
 
 import lombok.AllArgsConstructor;
+import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -14,7 +15,13 @@ public class JoinListener implements Listener {
 
     @EventHandler
     public void onJoin(PlayerJoinEvent p_playerJoinEvent) {
+        p_playerJoinEvent.setJoinMessage(null);
+
         final Player player = p_playerJoinEvent.getPlayer();
+
+        player.setGameMode(GameMode.SURVIVAL);
+        player.setFlying(false);
+        player.teleport(m_mapService.getSpawn());
 
         final MiniBomb miniBomb = new MiniBomb(m_mapService);
 
