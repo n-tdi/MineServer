@@ -6,6 +6,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 import world.ntdi.api.hologram.Hologram;
 import world.ntdi.api.item.custom.CustomItemListener;
 import world.ntdi.api.sql.database.PostgresqlDatabase;
+import world.ntdi.api.sql.service.impl.PlayerServiceImpl;
+import world.ntdi.api.sql.service.services.PlayerService;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -15,7 +17,8 @@ import java.util.List;
 public final class Api extends JavaPlugin {
     @Getter
     private static PostgresqlDatabase m_postgresqlDatabase;
-
+    @Getter
+    private PlayerService m_playerService;
 
     @Override
     public void onEnable() {
@@ -41,6 +44,8 @@ public final class Api extends JavaPlugin {
         } catch (SQLException p_e) {
             throw new RuntimeException(p_e);
         }
+
+        m_playerService = new PlayerServiceImpl(m_postgresqlDatabase);
     }
 
     @Override
