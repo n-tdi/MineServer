@@ -23,7 +23,7 @@ public class SquidCannon extends CustomItem implements Listener {
     private final Cooldown m_cooldown;
 
     public SquidCannon(Core p_core) {
-        super(2, ChatColor.AQUA + "SQUID CANNON", new String[]{ChatColor.GRAY + "KABHEUBAHEGJLNAE"}, Material.CARROT_ON_A_STICK);
+        super(2, ChatColor.AQUA + "SQUID CANNON", new String[]{ChatColor.GRAY + "KABHEUBAHEGJLNAE"}, Material.CARROT_ON_A_STICK, 10 * 1000);
         m_core = p_core;
         m_cooldown = new Cooldown();
     }

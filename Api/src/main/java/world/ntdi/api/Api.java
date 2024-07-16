@@ -2,6 +2,8 @@ package world.ntdi.api;
 
 import com.j256.ormlite.table.TableUtils;
 import lombok.Getter;
+import lombok.NonNull;
+import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import world.ntdi.api.hologram.Hologram;
@@ -22,9 +24,14 @@ public final class Api extends JavaPlugin {
     @Getter
     private PlayerService m_playerService;
 
+    private BukkitAudiences m_adventure;
+
+
     @Override
     public void onEnable() {
         // Plugin startup logic
+        m_adventure = BukkitAudiences.create(this);
+
         getConfig().options().copyDefaults(true);
         saveDefaultConfig();
 
@@ -71,4 +78,10 @@ public final class Api extends JavaPlugin {
 
     public static List<Hologram> toBeDeleted = new ArrayList<>();
 
+    public @NonNull BukkitAudiences adventure() {
+        if(m_adventure == null) {
+            throw new IllegalStateException("Tried to access Adventure when the plugin was disabled!");
+        }
+        return m_adventure;
+    }
 }

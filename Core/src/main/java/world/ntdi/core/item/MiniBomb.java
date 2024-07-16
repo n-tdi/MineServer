@@ -1,8 +1,5 @@
 package world.ntdi.core.item;
 
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.TextComponent;
-import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -30,7 +27,7 @@ public class MiniBomb extends CustomItem implements Listener {
     private final Core m_core;
 
     public MiniBomb(MapService p_mapService, Core p_core) {
-        super(1, ChatColor.RED + "Mini Bomb", new String[]{ChatColor.GRAY + "Aww, so cute!"}, Material.APPLE);
+        super(1, ChatColor.RED + "Mini Bomb", new String[]{ChatColor.GRAY + "Aww, so cute!"}, Material.APPLE, 5 * 1000);
 
         m_mapService = p_mapService;
         m_cooldown = new Cooldown();
@@ -51,13 +48,6 @@ public class MiniBomb extends CustomItem implements Listener {
 
     private void placeMiniBomb(final Player p_player, final Location p_location) {
         if (!m_mapService.getMapRegion().contains(p_location)) {
-            return;
-        }
-
-        if (m_cooldown.hasCooldown(this)) {
-            final TextComponent message = Component.text(
-                    m_cooldown.getCooldownRemaining(this, TimeUnit.SECONDS) + "s", NamedTextColor.AQUA);
-            m_core.adventure().player(p_player).sendActionBar(message);
             return;
         }
 

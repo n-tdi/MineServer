@@ -15,12 +15,14 @@ public abstract class CustomItem {
     private final String m_title;
     private final String[] m_description;
     private final Material m_material;
+    private final long m_cooldown;
 
-    protected CustomItem(int p_id, String p_title, String[] p_description, Material p_material) {
+    protected CustomItem(int p_id, String p_title, String[] p_description, Material p_material, long p_cooldown) {
         m_id = p_id;
         m_title = p_title;
         m_description = p_description;
         m_material = p_material;
+        m_cooldown = p_cooldown;
     }
 
     public ItemStack getItemStack() {
