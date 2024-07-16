@@ -19,7 +19,7 @@ public class JoinListener implements Listener {
     public void onJoin(PlayerJoinEvent p_playerJoinEvent) {
         final Player player = p_playerJoinEvent.getPlayer();
 
-        final MiniBomb miniBomb = new MiniBomb(m_mapService);
+        final MiniBomb miniBomb = new MiniBomb(m_mapService, m_core);
         final SquidCannon squidCannon = new SquidCannon(m_core);
 
         player.getInventory().addItem(miniBomb.getItemStack(), squidCannon.getItemStack());

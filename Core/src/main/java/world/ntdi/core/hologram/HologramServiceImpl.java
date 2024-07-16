@@ -53,8 +53,9 @@ public class HologramServiceImpl implements HologramService{
             public void run() {
                 if (m_durationUntilReset <= 0) {
                     m_core.adventure().all().sendMessage(mapHasBeenReset);
+                    m_mapService.teleportAllPlayersToSpawn();
                     m_mapService.restoreMap();
-                    m_durationUntilReset = 10 * 60 * 1000;
+                    resetMapResetTimer();
                 }
 
                 if (m_durationUntilReset <= 60 * 1000 && m_durationUntilReset > 59 * 1000) {

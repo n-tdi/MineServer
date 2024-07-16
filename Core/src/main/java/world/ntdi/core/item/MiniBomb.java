@@ -1,7 +1,8 @@
 package world.ntdi.core.item;
 
-import net.md_5.bungee.api.ChatMessageType;
-import net.md_5.bungee.api.chat.TextComponent;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.TextComponent;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -15,6 +16,7 @@ import org.bukkit.event.entity.ExplosionPrimeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import world.ntdi.api.cooldown.Cooldown;
 import world.ntdi.api.item.custom.CustomItem;
+import world.ntdi.core.Core;
 import world.ntdi.core.map.MapService;
 
 import java.util.UUID;
@@ -25,12 +27,14 @@ public class MiniBomb extends CustomItem implements Listener {
 
     private final MapService m_mapService;
     private final Cooldown m_cooldown;
+    private final Core m_core;
 
-    public MiniBomb(MapService p_mapService) {
+    public MiniBomb(MapService p_mapService, Core p_core) {
         super(1, ChatColor.RED + "Mini Bomb", new String[]{ChatColor.GRAY + "Aww, so cute!"}, Material.APPLE);
 
         m_mapService = p_mapService;
         m_cooldown = new Cooldown();
+        m_core = p_core;
 
         Bukkit.getServer().getPluginManager().registerEvents(this, Bukkit.getPluginManager().getPlugin("Core"));
     }
@@ -51,8 +55,9 @@ public class MiniBomb extends CustomItem implements Listener {
         }
 
         if (m_cooldown.hasCooldown(this)) {
-            final String cooldownMessage = ChatColor.AQUA + "" + m_cooldown.getCooldownRemaining(this, TimeUnit.SECONDS) + "s";
-            p_player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacy(cooldownMessage));
+            final TextComponent message = Component.text(
+                    m_cooldown.getCooldownRemaining(this, TimeUnit.SECONDS) + "s", NamedTextColor.AQUA);
+            m_core.adventure().player(p_player).sendActionBar(message);
             return;
         }
 

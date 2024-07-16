@@ -1,7 +1,8 @@
 package world.ntdi.core.item;
 
-import net.md_5.bungee.api.ChatMessageType;
-import net.md_5.bungee.api.chat.TextComponent;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.TextComponent;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -11,6 +12,7 @@ import org.bukkit.entity.Squid;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.util.Vector;
 import world.ntdi.api.cooldown.Cooldown;
 import world.ntdi.api.item.custom.CustomItem;
 import world.ntdi.core.Core;
@@ -29,18 +31,19 @@ public class SquidCannon extends CustomItem implements Listener {
 
     @Override
     public void onLeftClick(Player p_player, PlayerInteractEvent p_playerInteractEvent) {
-
+        createSquid(p_player, p_playerInteractEvent);
     }
 
     @Override
     public void onRightClick(Player p_player, PlayerInteractEvent p_playerInteractEvent) {
-
+        createSquid(p_player, p_playerInteractEvent);
     }
 
     private void createSquid(Player p_player, PlayerInteractEvent p_playerInteractEvent) {
         if (m_cooldown.hasCooldown(this)) {
-            final String cooldownMessage = ChatColor.AQUA + "" + m_cooldown.getCooldownRemaining(this, TimeUnit.SECONDS) + "s";
-            p_player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacy(cooldownMessage));
+            final TextComponent message = Component.text(
+                    m_cooldown.getCooldownRemaining(this, TimeUnit.SECONDS) + "s", NamedTextColor.AQUA);
+            m_core.adventure().player(p_player).sendActionBar(message);
             return;
         }
 
@@ -48,28 +51,27 @@ public class SquidCannon extends CustomItem implements Listener {
         final Location location = p_player.getLocation();
 
         final Squid squid = world.spawn(location, Squid.class);
-        squid.setVelocity(p_player.getLocation().getDirection().multiply(2));
+        squid.setVelocity(p_player.getLocation().getDirection().add(new Vector(0, 0.4, 0)).multiply(4));
         squid.setInvulnerable(true);
         squid.setCustomNameVisible(true);
 
         new BukkitRunnable() {
-            private double m_lasting = 3;
+            private double m_lasting = 1.5;
             @Override
             public void run() {
-                if (m_lasting > 0) {
+                if (m_lasting > 0.1) {
                     m_lasting -= 0.1;
+                    squid.setCustomName(ChatColor.AQUA + String.format("%.2g%n", m_lasting) + "s");
                 } else {
                     squid.remove();
                     cancel();
-
                     world.createExplosion(location, 5, false, true, p_player);
-                }
 
-                squid.setCustomName(ChatColor.AQUA.toString() + m_lasting + "s");
+                }
             }
         }.runTaskTimer(m_core, 0, 3);
 
-        m_cooldown.setCooldown(this, 10, TimeUnit.SECONDS);
+        m_cooldown.setCooldown(this, 1, TimeUnit.SECONDS);
 
     }
 }

@@ -50,7 +50,7 @@ public final class Core extends JavaPlugin {
     }
 
     private void createCustomItems() {
-        CustomItemRegister.registerCustomItem(new MiniBomb(m_mapService));
+        CustomItemRegister.registerCustomItem(new MiniBomb(m_mapService, this));
         CustomItemRegister.registerCustomItem(new SquidCannon(this));
     }
 
