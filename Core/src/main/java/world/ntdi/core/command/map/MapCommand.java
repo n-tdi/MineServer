@@ -4,15 +4,16 @@ import lombok.NonNull;
 import org.bukkit.command.CommandSender;
 import world.ntdi.api.command.simple.ApiCommand;
 import world.ntdi.api.command.simple.builder.LabelBuilder;
+import world.ntdi.core.hologram.HologramService;
 import world.ntdi.core.map.MapService;
 
 import java.util.List;
 
 public class MapCommand extends ApiCommand {
-    public MapCommand(final MapService p_mapService) {
+    public MapCommand(final MapService p_mapService, final HologramService p_hologramService) {
         super(LabelBuilder.of("map", "kaboom.map").build().make());
 
-        addSubcommand(new MapRestoreCommand(p_mapService));
+        addSubcommand(new MapRestoreCommand(p_mapService, p_hologramService));
     }
 
     @Override

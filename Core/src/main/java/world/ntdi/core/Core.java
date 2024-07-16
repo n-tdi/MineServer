@@ -6,6 +6,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 import world.ntdi.api.command.CommandCL;
 import world.ntdi.api.item.custom.CustomItemRegister;
 import world.ntdi.core.command.map.MapCommand;
+import world.ntdi.core.hologram.HologramService;
+import world.ntdi.core.hologram.HologramServiceImpl;
 import world.ntdi.core.item.MiniBomb;
 import world.ntdi.core.item.SquidCannon;
 import world.ntdi.core.listener.ExplosionListener;
@@ -18,15 +20,21 @@ import world.ntdi.core.map.MapServiceImpl;
 public final class Core extends JavaPlugin {
     @Getter
     private MapService m_mapService;
+    @Getter
+    private HologramService m_hologramService;
 
     @Override
     public void onEnable() {
         // Plugin startup logic
         m_mapService = new MapServiceImpl();
+        m_hologramService = new HologramServiceImpl(m_mapService, this);
 
         m_mapService.snapshotMap();
 
-        CommandCL.register(new MapCommand(m_mapService), "kaboom");
+        m_hologramService.createResetHologram();
+        m_hologramService.setupHologramLoop();
+
+        CommandCL.register(new MapCommand(m_mapService, m_hologramService), "kaboom");
 
         registerEvent(new ExplosionListener(m_mapService));
         registerEvent(new JoinListener(m_mapService, this));
