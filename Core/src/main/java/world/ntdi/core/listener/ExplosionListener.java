@@ -13,8 +13,6 @@ public class ExplosionListener implements Listener {
     @EventHandler
     public void onExplode(EntityExplodeEvent p_entityExplodeEvent) {
         p_entityExplodeEvent.blockList().removeIf(block -> !m_mapService.getMapRegion().contains(block));
-
-
     }
 
     @EventHandler

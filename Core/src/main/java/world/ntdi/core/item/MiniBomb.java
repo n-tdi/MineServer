@@ -57,6 +57,7 @@ public class MiniBomb extends CustomItem implements Listener {
         }
 
         final TNTPrimed tntPrimed = (TNTPrimed) p_location.getWorld().spawnEntity(p_location, EntityType.TNT);
+        tntPrimed.setSource(p_player);
 
         m_lastExplosionUUID = tntPrimed.getUniqueId();
 
