@@ -8,6 +8,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import world.ntdi.api.hologram.Hologram;
 import world.ntdi.api.item.custom.CustomItemListener;
+import world.ntdi.api.playerwrapper.PlayerWrapperListener;
 import world.ntdi.api.sql.database.PostgresqlDatabase;
 import world.ntdi.api.sql.entity.PlayerEntity;
 import world.ntdi.api.sql.service.impl.PlayerServiceImpl;
@@ -42,6 +43,7 @@ public final class Api extends JavaPlugin {
         }
 
         getServer().getPluginManager().registerEvents(new CustomItemListener(), this);
+        getServer().getPluginManager().registerEvents(new PlayerWrapperListener(), this);
     }
 
     private void initializeDatabase() throws SQLException {

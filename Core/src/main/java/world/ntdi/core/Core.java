@@ -9,6 +9,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import world.ntdi.api.Api;
 import world.ntdi.api.command.CommandCL;
 import world.ntdi.api.item.custom.CustomItemRegister;
+import world.ntdi.api.playerwrapper.PlayerWrapperListener;
 import world.ntdi.core.command.map.MapCommand;
 import world.ntdi.core.hologram.HologramService;
 import world.ntdi.core.hologram.HologramServiceImpl;
@@ -19,7 +20,6 @@ import world.ntdi.core.listener.JoinListener;
 import world.ntdi.core.listener.PlayerDamageListener;
 import world.ntdi.core.map.MapService;
 import world.ntdi.core.map.MapServiceImpl;
-import world.ntdi.core.playerwrapper.PlayerWrapperListener;
 
 
 public final class Core extends JavaPlugin {
@@ -50,7 +50,6 @@ public final class Core extends JavaPlugin {
         registerEvent(new ExplosionListener(m_mapService));
         registerEvent(new JoinListener(m_mapService, this));
         registerEvent(new PlayerDamageListener());
-        registerEvent(new PlayerWrapperListener(this));
 
         createCustomItems();
     }
