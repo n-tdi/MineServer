@@ -4,6 +4,7 @@ import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import world.ntdi.api.hologram.Hologram;
+import world.ntdi.api.item.custom.CustomItemListener;
 import world.ntdi.api.sql.database.PostgresqlDatabase;
 
 import java.sql.SQLException;
@@ -23,6 +24,8 @@ public final class Api extends JavaPlugin {
         saveDefaultConfig();
 
         initializeDatabase();
+
+        getServer().getPluginManager().registerEvents(new CustomItemListener(), this);
     }
 
     private void initializeDatabase() {

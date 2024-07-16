@@ -21,5 +21,8 @@ public class JoinListener implements Listener {
         player.setGameMode(GameMode.SURVIVAL);
         player.setFlying(false);
         player.teleport(m_mapService.getSpawn());
+
+        player.setHealth(20);
+        player.setFoodLevel(20);
     }
 }

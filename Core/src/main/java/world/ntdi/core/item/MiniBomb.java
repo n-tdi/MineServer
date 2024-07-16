@@ -2,6 +2,7 @@ package world.ntdi.core.item;
 
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -9,6 +10,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.TNTPrimed;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.event.entity.ExplosionPrimeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import world.ntdi.api.cooldown.Cooldown;
@@ -18,7 +20,7 @@ import world.ntdi.core.map.MapService;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
-public class MiniBomb extends CustomItem {
+public class MiniBomb extends CustomItem implements Listener {
     private UUID m_lastExplosionUUID;
 
     private final MapService m_mapService;
@@ -29,6 +31,8 @@ public class MiniBomb extends CustomItem {
 
         m_mapService = p_mapService;
         m_cooldown = new Cooldown();
+
+        Bukkit.getServer().getPluginManager().registerEvents(this, Bukkit.getPluginManager().getPlugin("Core"));
     }
 
     @Override
