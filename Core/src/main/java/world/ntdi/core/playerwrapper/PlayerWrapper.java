@@ -2,6 +2,7 @@ package world.ntdi.core.playerwrapper;
 
 import lombok.Getter;
 import world.ntdi.api.pet.CustomPet;
+import world.ntdi.api.pet.Pets;
 import world.ntdi.api.sql.entity.PlayerEntity;
 import world.ntdi.core.Core;
 
@@ -37,6 +38,36 @@ public class PlayerWrapper {
         m_pets.set(0, playerEntity.getPetSlot1() == null ? null : playerEntity.getPetSlot1().create());
         m_pets.set(1, playerEntity.getPetSlot2() == null ? null : playerEntity.getPetSlot2().create());
         m_pets.set(2, playerEntity.getPetSlot3() == null ? null : playerEntity.getPetSlot3().create());
+    }
 
+    public void setPet(int p_slot, Pets p_pet) {
+        if (p_slot < 0 || p_slot >= m_pets.size()) {
+            throw new IllegalArgumentException("Invalid slot");
+        }
+        final PlayerEntity playerEntity = m_core.api().getPlayerService().getPlayerOrDefault(getUuid());
+
+        m_pets.set(p_slot, p_pet.create());
+
+        switch (p_slot) {
+            case 0:
+                playerEntity.setPetSlot1(p_pet);
+                break;
+            case 1:
+                playerEntity.setPetSlot2(p_pet);
+                break;
+            case 2:
+                playerEntity.setPetSlot3(p_pet);
+                break;
+        }
+
+        m_core.api().getPlayerService().savePlayer(playerEntity);
+    }
+
+    public CustomPet getPet(int p_slot) {
+        if (p_slot < 0 || p_slot >= m_pets.size()) {
+            throw new IllegalArgumentException("Invalid slot");
+        }
+
+        return m_pets.get(p_slot);
     }
 }
