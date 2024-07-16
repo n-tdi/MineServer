@@ -1,6 +1,8 @@
 package world.ntdi.core;
 
 import lombok.Getter;
+import lombok.NonNull;
+import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import world.ntdi.api.command.CommandCL;
@@ -23,9 +25,13 @@ public final class Core extends JavaPlugin {
     @Getter
     private HologramService m_hologramService;
 
+    private BukkitAudiences m_adventure;
+
     @Override
     public void onEnable() {
         // Plugin startup logic
+        m_adventure = BukkitAudiences.create(this);
+
         m_mapService = new MapServiceImpl();
         m_hologramService = new HologramServiceImpl(m_mapService, this);
 
@@ -55,5 +61,16 @@ public final class Core extends JavaPlugin {
     @Override
     public void onDisable() {
         // Plugin shutdown logic
+        if(m_adventure != null) {
+            m_adventure.close();
+            m_adventure = null;
+        }
+    }
+
+    public @NonNull BukkitAudiences adventure() {
+        if(m_adventure == null) {
+            throw new IllegalStateException("Tried to access Adventure when the plugin was disabled!");
+        }
+        return m_adventure;
     }
 }

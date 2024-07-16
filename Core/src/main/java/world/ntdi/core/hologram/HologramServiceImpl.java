@@ -1,6 +1,10 @@
 package world.ntdi.core.hologram;
 
 import lombok.RequiredArgsConstructor;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.TextComponent;
+import net.kyori.adventure.text.format.TextColor;
+import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -30,17 +34,31 @@ public class HologramServiceImpl implements HologramService{
 
     @Override
     public void setupHologramLoop() {
+        final TextComponent mapHasBeenReset = Component
+                .text("Map has been ").color(TextColor.color(0xd10023))
+                .append(Component.text("reset!")
+                        .color(TextColor.color(0x740B10))
+                        .decorate(TextDecoration.BOLD)
+                );
+
+        final TextComponent mapWillResetSoon = Component
+                .text("Map will reset in ").color(TextColor.color(0xd10023))
+                .append(Component.text("1 minute!")
+                        .color(TextColor.color(0x740B10))
+                        .decorate(TextDecoration.BOLD)
+                );
+
         new BukkitRunnable() {
             @Override
             public void run() {
                 if (m_durationUntilReset <= 0) {
-                    Bukkit.broadcastMessage(ChatColor.RED + "Map has been reset!");
+                    m_core.adventure().all().sendMessage(mapHasBeenReset);
                     m_mapService.restoreMap();
                     m_durationUntilReset = 10 * 60 * 1000;
                 }
 
-                if (m_durationUntilReset <= 60 * 1000 && m_durationUntilReset % 1000 == 0) {
-                    Bukkit.broadcastMessage(ChatColor.RED + "Map will reset in " + convertMillisToReadableTime(m_durationUntilReset));
+                if (m_durationUntilReset <= 60 * 1000 && m_durationUntilReset > 59 * 1000) {
+                    m_core.adventure().all().sendMessage(mapWillResetSoon);
                 }
 
                 m_mapResetHologram.updateHologram(m_prefix + convertMillisToReadableTime(m_durationUntilReset));
