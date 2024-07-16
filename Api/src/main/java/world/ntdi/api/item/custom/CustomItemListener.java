@@ -52,7 +52,7 @@ public class CustomItemListener implements Listener {
             if (System.currentTimeMillis() < cooldownsMap.get(id)) {
                 // Send cooldown message
                 final TextComponent message = Component.text(
-                        convertMillisToReadableTime(cooldownsMap.get(id)) + "s", NamedTextColor.AQUA);
+                        convertMillisToReadableTime(cooldownsMap.get(id) - System.currentTimeMillis()), NamedTextColor.AQUA);
 
                 Api.getInstance().adventure().player(player).sendActionBar(message);
                 return;

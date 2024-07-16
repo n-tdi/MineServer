@@ -31,8 +31,8 @@ public class PlayerServiceImpl implements PlayerService {
     @Override
     public PlayerEntity getPlayerOrDefault(UUID p_uuid) {
         try {
-            if (m_playerDao.idExists(p_uuid)) {
-                return m_playerDao.queryForId(p_uuid);
+            if (getPlayerDao().idExists(p_uuid)) {
+                return getPlayerDao().queryForId(p_uuid);
             } else {
                 return new PlayerEntity(p_uuid, 0, 0, null, null, null);
             }
@@ -44,7 +44,7 @@ public class PlayerServiceImpl implements PlayerService {
     @Override
     public void savePlayer(PlayerEntity p_playerEntity) {
         try {
-            m_playerDao.createOrUpdate(p_playerEntity);
+            getPlayerDao().createOrUpdate(p_playerEntity);
         } catch (SQLException p_e) {
             throw new RuntimeException(p_e);
         }
@@ -53,7 +53,7 @@ public class PlayerServiceImpl implements PlayerService {
     @Override
     public void deletePlayer(PlayerEntity p_playerEntity) {
         try {
-            m_playerDao.delete(p_playerEntity);
+            getPlayerDao().delete(p_playerEntity);
         } catch (SQLException p_e) {
             throw new RuntimeException(p_e);
         }

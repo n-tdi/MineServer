@@ -11,11 +11,11 @@ import java.lang.reflect.InvocationTargetException;
 public enum Pets {
     CREEPER(CreeperPet.class);
 
-    private Class<? extends CustomPet> m_class;
+    private Class<? extends CustomPet> m_clazz;
 
     public CustomPet create() {
         try {
-            return m_class.getDeclaredConstructor().newInstance();
+            return m_clazz.getDeclaredConstructor().newInstance();
         } catch (InstantiationException | IllegalAccessException e) {
             e.printStackTrace();
         } catch (InvocationTargetException | NoSuchMethodException p_e) {
