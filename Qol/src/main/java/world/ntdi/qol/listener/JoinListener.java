@@ -1,6 +1,7 @@
 package world.ntdi.qol.listener;
 
 import lombok.AllArgsConstructor;
+import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -14,8 +15,6 @@ public class JoinListener implements Listener {
 
     @EventHandler
     public void onJoin(PlayerJoinEvent p_playerJoinEvent) {
-        p_playerJoinEvent.setJoinMessage(null);
-
         final Player player = p_playerJoinEvent.getPlayer();
 
         player.setGameMode(GameMode.SURVIVAL);
@@ -24,5 +23,8 @@ public class JoinListener implements Listener {
 
         player.setHealth(20);
         player.setFoodLevel(20);
+
+        final String joinMessage = ChatColor.GRAY + "<" + ChatColor.GOLD + "+" + ChatColor.GRAY + "> " + player.getName();
+        p_playerJoinEvent.setJoinMessage(joinMessage);
     }
 }

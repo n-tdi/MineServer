@@ -5,6 +5,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import world.ntdi.core.Core;
 import world.ntdi.qol.listener.HungerListener;
 import world.ntdi.qol.listener.JoinListener;
+import world.ntdi.qol.listener.QuitListener;
 
 public final class Qol extends JavaPlugin {
     private Core m_core;
@@ -17,6 +18,7 @@ public final class Qol extends JavaPlugin {
 
         registerEvent(new HungerListener());
         registerEvent(new JoinListener(m_core.getMapService()));
+        registerEvent(new QuitListener());
     }
 
     private void registerEvent(Listener p_listener) {
