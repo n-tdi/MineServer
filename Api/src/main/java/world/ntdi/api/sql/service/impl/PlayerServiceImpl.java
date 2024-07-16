@@ -34,7 +34,7 @@ public class PlayerServiceImpl implements PlayerService {
             if (m_playerDao.idExists(p_uuid)) {
                 return m_playerDao.queryForId(p_uuid);
             } else {
-                return new PlayerEntity(p_uuid, 0, 0);
+                return new PlayerEntity(p_uuid, 0, 0, null, null, null);
             }
         } catch (SQLException p_e) {
             throw new RuntimeException(p_e);
