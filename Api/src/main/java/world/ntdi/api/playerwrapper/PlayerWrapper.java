@@ -62,6 +62,7 @@ public class PlayerWrapper {
         }
 
         m_api.getPlayerService().savePlayer(playerEntity);
+        m_api.getPetService().recalculatePets(getUuid());
     }
 
     public CustomPet getPet(int p_slot) {

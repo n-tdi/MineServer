@@ -8,6 +8,9 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import world.ntdi.api.hologram.Hologram;
 import world.ntdi.api.item.custom.CustomItemListener;
+import world.ntdi.api.pet.PetListener;
+import world.ntdi.api.pet.PetService;
+import world.ntdi.api.pet.PetServiceImpl;
 import world.ntdi.api.playerwrapper.PlayerWrapperListener;
 import world.ntdi.api.sql.database.PostgresqlDatabase;
 import world.ntdi.api.sql.entity.PlayerEntity;
@@ -24,6 +27,8 @@ public final class Api extends JavaPlugin {
     private static PostgresqlDatabase m_postgresqlDatabase;
     @Getter
     private PlayerService m_playerService;
+    @Getter
+    private PetService m_petService;
 
     private BukkitAudiences m_adventure;
 
@@ -42,8 +47,12 @@ public final class Api extends JavaPlugin {
             throw new RuntimeException(p_e);
         }
 
+        m_petService = new PetServiceImpl();
+        m_petService.setupPetSpawnLoop();
+
         getServer().getPluginManager().registerEvents(new CustomItemListener(), this);
         getServer().getPluginManager().registerEvents(new PlayerWrapperListener(), this);
+        getServer().getPluginManager().registerEvents(new PetListener(m_petService), this);
     }
 
     private void initializeDatabase() throws SQLException {

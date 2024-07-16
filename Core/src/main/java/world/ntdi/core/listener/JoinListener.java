@@ -24,4 +24,6 @@ public class JoinListener implements Listener {
 
         player.getInventory().addItem(miniBomb.getItemStack(), squidCannon.getItemStack());
     }
+
+
 }
