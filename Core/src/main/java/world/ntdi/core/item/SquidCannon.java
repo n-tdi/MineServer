@@ -12,7 +12,6 @@ import org.bukkit.entity.Squid;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.util.Vector;
 import world.ntdi.api.cooldown.Cooldown;
 import world.ntdi.api.item.custom.CustomItem;
 import world.ntdi.core.Core;
@@ -51,7 +50,7 @@ public class SquidCannon extends CustomItem implements Listener {
         final Location location = p_player.getLocation();
 
         final Squid squid = world.spawn(location, Squid.class);
-        squid.setVelocity(p_player.getLocation().getDirection().add(new Vector(0, 0.4, 0)).multiply(4));
+        squid.setVelocity(p_player.getLocation().getDirection().multiply(3));
         squid.setInvulnerable(true);
         squid.setCustomNameVisible(true);
 
