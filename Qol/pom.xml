@@ -76,11 +76,13 @@
             <groupId>world.ntdi</groupId>
             <artifactId>Api</artifactId>
             <version>1.0.0</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>world.ntdi</groupId>
             <artifactId>Core</artifactId>
             <version>1.0.0</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
