@@ -1,11 +1,13 @@
 package world.ntdi.api;
 
+import com.j256.ormlite.table.TableUtils;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import world.ntdi.api.hologram.Hologram;
 import world.ntdi.api.item.custom.CustomItemListener;
 import world.ntdi.api.sql.database.PostgresqlDatabase;
+import world.ntdi.api.sql.entity.PlayerEntity;
 import world.ntdi.api.sql.service.impl.PlayerServiceImpl;
 import world.ntdi.api.sql.service.services.PlayerService;
 
@@ -26,12 +28,16 @@ public final class Api extends JavaPlugin {
         getConfig().options().copyDefaults(true);
         saveDefaultConfig();
 
-        initializeDatabase();
+        try {
+            initializeDatabase();
+        } catch (SQLException p_e) {
+            throw new RuntimeException(p_e);
+        }
 
         getServer().getPluginManager().registerEvents(new CustomItemListener(), this);
     }
 
-    private void initializeDatabase() {
+    private void initializeDatabase() throws SQLException {
         final String sqlHost = getConfig().getString("sql-host");
         final String sqlPort = getConfig().getString("sql-port");
         final String sqlUser = getConfig().getString("sql-user");
@@ -44,6 +50,8 @@ public final class Api extends JavaPlugin {
         } catch (SQLException p_e) {
             throw new RuntimeException(p_e);
         }
+
+        TableUtils.createTableIfNotExists(m_postgresqlDatabase.getConnectionSource(), PlayerEntity.class);
 
         m_playerService = new PlayerServiceImpl(m_postgresqlDatabase);
     }

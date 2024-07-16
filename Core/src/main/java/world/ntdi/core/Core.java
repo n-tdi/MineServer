@@ -19,6 +19,7 @@ import world.ntdi.core.listener.JoinListener;
 import world.ntdi.core.listener.PlayerDamageListener;
 import world.ntdi.core.map.MapService;
 import world.ntdi.core.map.MapServiceImpl;
+import world.ntdi.core.playerwrapper.PlayerWrapperListener;
 
 
 public final class Core extends JavaPlugin {
@@ -49,6 +50,7 @@ public final class Core extends JavaPlugin {
         registerEvent(new ExplosionListener(m_mapService));
         registerEvent(new JoinListener(m_mapService, this));
         registerEvent(new PlayerDamageListener());
+        registerEvent(new PlayerWrapperListener(this));
 
         createCustomItems();
     }
