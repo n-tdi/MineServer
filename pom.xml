@@ -10,6 +10,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>Api</module>
+        <module>spigot_1_21_R0_1_SNAPSHOT</module>
         <module>Core</module>
         <module>Qol</module>
     </modules>
