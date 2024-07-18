@@ -56,7 +56,7 @@ public final class Core extends JavaPlugin {
 
         m_mapService = new MapServiceImpl();
         m_hologramService = new HologramServiceImpl(m_mapService, this);
-        m_playerNameTagService = new PlayerNameTagServiceImpl();
+        m_playerNameTagService = new PlayerNameTagServiceImpl(this);
 
         m_mapService.snapshotMap();
 
