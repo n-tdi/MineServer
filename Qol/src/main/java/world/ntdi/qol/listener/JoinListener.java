@@ -5,21 +5,23 @@ import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import world.ntdi.api.util.PlayerUtil;
 import world.ntdi.core.map.MapService;
 
 @AllArgsConstructor
 public class JoinListener implements Listener {
     private final MapService m_mapService;
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGH)
     public void onJoin(PlayerJoinEvent p_playerJoinEvent) {
         final Player player = p_playerJoinEvent.getPlayer();
 
         player.setGameMode(GameMode.SURVIVAL);
         player.setFlying(false);
-        player.teleport(m_mapService.getSpawn());
+        PlayerUtil.teleportWithPassengers(player, m_mapService.getSpawn());
 
         player.setHealth(20);
         player.setFoodLevel(20);

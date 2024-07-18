@@ -11,6 +11,7 @@ import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
 import world.ntdi.api.region.Cuboid;
+import world.ntdi.api.util.PlayerUtil;
 
 import java.util.HashSet;
 import java.util.List;
@@ -29,7 +30,7 @@ public class MapServiceImpl implements MapService{
     @Override
     public void teleportAllPlayersToSpawn() {
         final Location spawn = getSpawn();
-        Bukkit.getOnlinePlayers().forEach(player -> player.teleport(spawn));
+        Bukkit.getOnlinePlayers().forEach(player -> PlayerUtil.teleportWithPassengers(player, spawn));
     }
 
     @Override

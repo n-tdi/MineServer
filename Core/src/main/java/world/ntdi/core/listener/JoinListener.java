@@ -25,7 +25,8 @@ public class JoinListener implements Listener {
         final SquidCannon squidCannon = new SquidCannon(m_core);
 
         player.getInventory().addItem(miniBomb.getItemStack(), squidCannon.getItemStack());
+
         m_playerNameTagService.initializePlayer(player);
-        m_playerNameTagService.updatePlayerNameTag(player, player.getName());
+//        m_playerNameTagService.updatePlayerNameTag(player, player.getName());
     }
 }

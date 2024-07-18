@@ -107,10 +107,10 @@
             <groupId>net.kyori</groupId>
             <artifactId>adventure-platform-bukkit</artifactId>
         </dependency>
-        <dependency>
-            <groupId>world.ntdi</groupId>
-            <artifactId>spigot_1_21_R0_1_SNAPSHOT</artifactId>
-            <version>1.0.0</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>world.ntdi</groupId>-->
+<!--            <artifactId>spigot_1_21_R0_1_SNAPSHOT</artifactId>-->
+<!--            <version>1.0.0</version>-->
+<!--        </dependency>-->
     </dependencies>
 </project>

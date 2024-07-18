@@ -11,7 +11,6 @@ import world.ntdi.api.command.CommandCL;
 import world.ntdi.api.item.custom.CustomItemRegister;
 import world.ntdi.api.nametag.PlayerNameTagService;
 import world.ntdi.api.nametag.PlayerNameTagServiceImpl;
-import world.ntdi.api.nms.ChangePlayerNameService;
 import world.ntdi.core.command.map.MapCommand;
 import world.ntdi.core.hologram.HologramService;
 import world.ntdi.core.hologram.HologramServiceImpl;
@@ -23,8 +22,6 @@ import world.ntdi.core.listener.PlayerDamageListener;
 import world.ntdi.core.listener.PlayerQuitListener;
 import world.ntdi.core.map.MapService;
 import world.ntdi.core.map.MapServiceImpl;
-
-import java.util.logging.Level;
 
 
 public final class Core extends JavaPlugin {
@@ -38,24 +35,21 @@ public final class Core extends JavaPlugin {
     private BukkitAudiences m_adventure;
     private Api m_api;
 
-    @Getter
-    private ChangePlayerNameService m_changePlayerNameService;
-
     @Override
     public void onEnable() {
         // Plugin startup logic
         m_api = (Api) Bukkit.getServer().getPluginManager().getPlugin("Api");
 
-        try {
-            String packageName = "world.ntdi";
-            String internalsName = "spigot_" + Bukkit.getServer().getBukkitVersion().replace(".", "_").replace("-", "_");
-
-            Bukkit.getLogger().info(internalsName);
-
-            m_changePlayerNameService = (ChangePlayerNameService) Class.forName(packageName + "." + internalsName).newInstance();
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | ClassCastException exception) {
-            Bukkit.getLogger().log(Level.SEVERE, "Could not find a valid implementation for this server version.");
-        }
+//        try {
+//            String packageName = "world.ntdi";
+//            String internalsName = "spigot_" + Bukkit.getServer().getBukkitVersion().replace(".", "_").replace("-", "_");
+//
+//            Bukkit.getLogger().info(internalsName);
+//
+//            m_changePlayerNameService = (ChangePlayerNameService) Class.forName(packageName + "." + internalsName).newInstance();
+//        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | ClassCastException exception) {
+//            Bukkit.getLogger().log(Level.SEVERE, "Could not find a valid implementation for this server version.");
+//        }
 
         m_adventure = BukkitAudiences.create(this);
 
