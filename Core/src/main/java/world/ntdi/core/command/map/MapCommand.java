@@ -14,6 +14,7 @@ public class MapCommand extends ApiCommand {
         super(LabelBuilder.of("map", "kaboom.map").build().make());
 
         addSubcommand(new MapRestoreCommand(p_mapService, p_hologramService));
+        addSubcommand(new MapSaveCommand(p_mapService));
     }
 
     @Override

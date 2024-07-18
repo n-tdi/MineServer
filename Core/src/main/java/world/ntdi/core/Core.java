@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.NonNull;
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import world.ntdi.api.Api;
@@ -88,6 +89,12 @@ public final class Core extends JavaPlugin {
             m_adventure.close();
             m_adventure = null;
         }
+
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            m_playerNameTagService.removePlayer(player);
+        }
+
+        m_mapService.restoreMap();
     }
 
     public @NonNull BukkitAudiences adventure() {
