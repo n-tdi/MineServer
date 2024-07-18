@@ -26,7 +26,5 @@ public class JoinListener implements Listener {
 
         final String joinMessage = ChatColor.GRAY + "<" + ChatColor.GOLD + "+" + ChatColor.GRAY + "> " + player.getName();
         p_playerJoinEvent.setJoinMessage(joinMessage);
-
-
     }
 }

@@ -9,6 +9,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 import world.ntdi.api.Api;
 import world.ntdi.api.command.CommandCL;
 import world.ntdi.api.item.custom.CustomItemRegister;
+import world.ntdi.api.nametag.PlayerNameTagService;
+import world.ntdi.api.nametag.PlayerNameTagServiceImpl;
 import world.ntdi.api.nms.ChangePlayerNameService;
 import world.ntdi.core.command.map.MapCommand;
 import world.ntdi.core.hologram.HologramService;
@@ -18,6 +20,7 @@ import world.ntdi.core.item.SquidCannon;
 import world.ntdi.core.listener.ExplosionListener;
 import world.ntdi.core.listener.JoinListener;
 import world.ntdi.core.listener.PlayerDamageListener;
+import world.ntdi.core.listener.PlayerQuitListener;
 import world.ntdi.core.map.MapService;
 import world.ntdi.core.map.MapServiceImpl;
 
@@ -29,6 +32,8 @@ public final class Core extends JavaPlugin {
     private MapService m_mapService;
     @Getter
     private HologramService m_hologramService;
+    @Getter
+    private PlayerNameTagService m_playerNameTagService;
 
     private BukkitAudiences m_adventure;
     private Api m_api;
@@ -56,6 +61,7 @@ public final class Core extends JavaPlugin {
 
         m_mapService = new MapServiceImpl();
         m_hologramService = new HologramServiceImpl(m_mapService, this);
+        m_playerNameTagService = new PlayerNameTagServiceImpl();
 
         m_mapService.snapshotMap();
 
@@ -65,8 +71,9 @@ public final class Core extends JavaPlugin {
         CommandCL.register(new MapCommand(m_mapService, m_hologramService), "kaboom");
 
         registerEvent(new ExplosionListener(m_mapService));
-        registerEvent(new JoinListener(m_mapService, this));
+        registerEvent(new JoinListener(m_mapService, m_playerNameTagService, this));
         registerEvent(new PlayerDamageListener());
+        registerEvent(new PlayerQuitListener(m_playerNameTagService));
 
         createCustomItems();
     }

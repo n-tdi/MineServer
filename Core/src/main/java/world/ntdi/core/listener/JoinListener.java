@@ -5,6 +5,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import world.ntdi.api.nametag.PlayerNameTagService;
 import world.ntdi.core.Core;
 import world.ntdi.core.item.MiniBomb;
 import world.ntdi.core.item.SquidCannon;
@@ -13,6 +14,7 @@ import world.ntdi.core.map.MapService;
 @AllArgsConstructor
 public class JoinListener implements Listener {
     private final MapService m_mapService;
+    private final PlayerNameTagService m_playerNameTagService;
     private final Core m_core;
 
     @EventHandler
@@ -23,7 +25,7 @@ public class JoinListener implements Listener {
         final SquidCannon squidCannon = new SquidCannon(m_core);
 
         player.getInventory().addItem(miniBomb.getItemStack(), squidCannon.getItemStack());
+        m_playerNameTagService.initializePlayer(player);
+        m_playerNameTagService.updatePlayerNameTag(player, player.getName());
     }
-
-
 }

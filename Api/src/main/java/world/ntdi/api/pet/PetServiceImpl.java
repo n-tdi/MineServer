@@ -96,7 +96,9 @@ public class PetServiceImpl implements PetService {
     public void despawnPet(UUID p_uuid, int p_slot) {
         List<ArmorStand> armorStands = m_spawnedPets.get(p_uuid);
         ArmorStand armorStand = armorStands.get(p_slot);
-        armorStand.remove();
+        if (armorStand != null) {
+            armorStand.remove();
+        }
         armorStands.set(p_slot, null);
     }
 
