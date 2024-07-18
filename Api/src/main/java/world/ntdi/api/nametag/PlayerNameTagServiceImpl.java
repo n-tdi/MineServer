@@ -1,5 +1,6 @@
 package world.ntdi.api.nametag;
 
+import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.entity.Display;
 import org.bukkit.entity.Player;
@@ -48,12 +49,15 @@ public class PlayerNameTagServiceImpl implements PlayerNameTagService {
         final Location location = p_player.getLocation();
 
         final TextDisplay textDisplay = location.getWorld().spawn(location, TextDisplay.class);
-        textDisplay.setCustomNameVisible(true);
-        textDisplay.setCustomName("Hello World");
-        textDisplay.setText("NameTag");
+        textDisplay.setCustomNameVisible(false);
+        textDisplay.setText("\uE81F\n" + addWhitespace("Ntdi") + "\n");
+
         textDisplay.setBillboard(Display.Billboard.CENTER);
         p_player.addPassenger(textDisplay);
-        p_player.hideEntity(m_javaPlugin, textDisplay);
+
+//        p_player.hideEntity(m_javaPlugin, textDisplay);
+
+        textDisplay.setBackgroundColor(Color.fromARGB(0, 1, 1, 1));
 
         m_uuidItemDisplayMap.put(p_player.getUniqueId(), textDisplay);
     }
@@ -72,5 +76,9 @@ public class PlayerNameTagServiceImpl implements PlayerNameTagService {
         if (textDisplay != null) {
             p_player.addPassenger(textDisplay);
         }
+    }
+
+    private String addWhitespace(String p_string) {
+        return "   " + p_string + "   ";
     }
 }
