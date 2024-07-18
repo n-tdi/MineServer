@@ -4,6 +4,7 @@ import org.bukkit.Location;
 import org.bukkit.entity.Display;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.TextDisplay;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import javax.annotation.Nullable;
 import java.util.Map;
@@ -12,9 +13,11 @@ import java.util.WeakHashMap;
 
 public class PlayerNameTagServiceImpl implements PlayerNameTagService {
     private final Map<UUID, TextDisplay> m_uuidItemDisplayMap;
+    private final JavaPlugin m_javaPlugin;
 
-    public PlayerNameTagServiceImpl() {
+    public PlayerNameTagServiceImpl(JavaPlugin p_javaPlugin) {
         m_uuidItemDisplayMap = new WeakHashMap<>();
+        m_javaPlugin = p_javaPlugin;
     }
 
     @Override
@@ -50,6 +53,7 @@ public class PlayerNameTagServiceImpl implements PlayerNameTagService {
         textDisplay.setText("NameTag");
         textDisplay.setBillboard(Display.Billboard.CENTER);
         p_player.addPassenger(textDisplay);
+        p_player.hideEntity(m_javaPlugin, textDisplay);
 
         m_uuidItemDisplayMap.put(p_player.getUniqueId(), textDisplay);
     }
