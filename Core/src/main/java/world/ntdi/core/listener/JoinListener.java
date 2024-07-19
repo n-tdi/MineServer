@@ -27,6 +27,9 @@ public class JoinListener implements Listener {
         player.getInventory().addItem(miniBomb.getItemStack(), squidCannon.getItemStack());
 
         m_playerNameTagService.initializePlayer(player);
-//        m_playerNameTagService.updatePlayerNameTag(player, player.getName());
+        m_playerNameTagService.updatePlayerNameTag(player, "\uE804 " + player.getName() + " \n ",
+                "\uE804 " + player.getName());
     }
 }
+
+

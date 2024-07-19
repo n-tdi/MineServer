@@ -29,6 +29,6 @@ public class JoinListener implements Listener {
         final String joinMessage = ChatColor.GRAY + "<" + ChatColor.GOLD + "+" + ChatColor.GRAY + "> " + player.getName();
         p_playerJoinEvent.setJoinMessage(joinMessage);
 
-        player.setResourcePack("https://github.com/tazpvp/TazKaboomTexturepack/raw/main/dist/TazKaboom.zip");
+        player.setResourcePack("https://github.com/tazpvp/TazKaboomTexturepack/raw/main/TazKaboom.zip");
     }
 }

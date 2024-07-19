@@ -1,5 +1,6 @@
 package world.ntdi.api.sql.entity;
 
+import com.j256.ormlite.dao.ForeignCollection;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import lombok.*;
@@ -30,6 +31,16 @@ public class PlayerEntity {
 
     @DatabaseField(columnName = "pet_slot_3", canBeNull = true)
     private Pets m_petSlot3;
+
+    @DatabaseField(columnName = "permissions")
+    private ForeignCollection<PlayerPermissionEntity> m_playerPermissionEntities;
+
+    @DatabaseField(columnName = "prefix", canBeNull = true)
+    private String m_prefix;
+
+    @DatabaseField(columnName = "group", foreign = true, foreignAutoRefresh = true)
+    private GroupEntity m_groupEntity;
+
 
 
     private int getLevel() {

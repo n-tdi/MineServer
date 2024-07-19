@@ -22,11 +22,14 @@ public class PlayerNameTagServiceImpl implements PlayerNameTagService {
     }
 
     @Override
-    public void updatePlayerNameTag(Player p_player, String p_NameTag) {
+    public void updatePlayerNameTag(Player p_player, String p_NameTag, String p_chatName) {
         TextDisplay textDisplay = m_uuidItemDisplayMap.get(p_player.getUniqueId());
 
         if (textDisplay != null) {
             textDisplay.setText(p_NameTag);
+            p_player.setDisplayName(p_chatName);
+            p_player.setPlayerListName(p_chatName);
+            p_player.setCustomName(p_chatName);
         } else {
             throw new RuntimeException("Player not initialized");
         }
@@ -50,7 +53,7 @@ public class PlayerNameTagServiceImpl implements PlayerNameTagService {
 
         final TextDisplay textDisplay = location.getWorld().spawn(location, TextDisplay.class);
         textDisplay.setCustomNameVisible(false);
-        textDisplay.setText("\uE81F\n" + addWhitespace("Ntdi") + "\n");
+        textDisplay.setText("\n");
 
         textDisplay.setBillboard(Display.Billboard.CENTER);
         p_player.addPassenger(textDisplay);
@@ -76,9 +79,5 @@ public class PlayerNameTagServiceImpl implements PlayerNameTagService {
         if (textDisplay != null) {
             p_player.addPassenger(textDisplay);
         }
-    }
-
-    private String addWhitespace(String p_string) {
-        return "   " + p_string + "   ";
     }
 }
