@@ -13,7 +13,10 @@ import world.ntdi.api.pet.PetService;
 import world.ntdi.api.pet.PetServiceImpl;
 import world.ntdi.api.playerwrapper.PlayerWrapperListener;
 import world.ntdi.api.sql.database.PostgresqlDatabase;
+import world.ntdi.api.sql.entity.GroupEntity;
+import world.ntdi.api.sql.entity.GroupPermissionEntity;
 import world.ntdi.api.sql.entity.PlayerEntity;
+import world.ntdi.api.sql.entity.PlayerPermissionEntity;
 import world.ntdi.api.sql.service.impl.PlayerServiceImpl;
 import world.ntdi.api.sql.service.services.PlayerService;
 
@@ -70,6 +73,9 @@ public final class Api extends JavaPlugin {
         }
 
         TableUtils.createTableIfNotExists(m_postgresqlDatabase.getConnectionSource(), PlayerEntity.class);
+        TableUtils.createTableIfNotExists(m_postgresqlDatabase.getConnectionSource(), GroupEntity.class);
+        TableUtils.createTableIfNotExists(m_postgresqlDatabase.getConnectionSource(), PlayerPermissionEntity.class);
+        TableUtils.createTableIfNotExists(m_postgresqlDatabase.getConnectionSource(), GroupPermissionEntity.class);
 
         m_playerService = new PlayerServiceImpl(m_postgresqlDatabase);
     }
