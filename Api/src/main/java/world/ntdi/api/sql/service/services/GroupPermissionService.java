@@ -10,4 +10,5 @@ public interface GroupPermissionService {
     void savePermission(GroupPermissionEntity p_groupPermissionEntity);
     void deletePermission(GroupPermissionEntity p_groupPermissionEntity);
     GroupPermissionEntity createPermission(GroupEntity p_groupEntity, String p_permission);
+    GroupPermissionEntity findByName(GroupEntity p_groupEntity, String p_permission);
 }

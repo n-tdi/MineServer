@@ -70,4 +70,16 @@ public class PlayerServiceImpl implements PlayerService {
             throw new RuntimeException(p_e);
         }
     }
+
+    @Override
+    public String getPrefix(PlayerEntity p_playerEntity) {
+        if (p_playerEntity.getPrefix() != null) {
+            return p_playerEntity.getPrefix();
+        }
+
+        if (p_playerEntity.getGroupEntity() != null && p_playerEntity.getGroupEntity().getPrefix() != null) {
+            return p_playerEntity.getGroupEntity().getPrefix();
+        }
+        return "";
+    }
 }

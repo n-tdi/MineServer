@@ -14,4 +14,5 @@ public interface GroupService {
     void deleteGroup(GroupEntity p_groupEntity);
     void deletePermission(GroupEntity p_groupEntity, String p_permission);
     List<String> getAllPermissions(GroupEntity p_groupEntity);
+    List<GroupEntity> getAllGroups();
 }

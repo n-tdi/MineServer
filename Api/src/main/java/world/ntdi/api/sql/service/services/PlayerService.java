@@ -12,4 +12,5 @@ public interface PlayerService {
     void savePlayer(PlayerEntity p_playerEntity);
     void deletePlayer(PlayerEntity p_playerEntity);
     List<String> getAllPermissions(PlayerEntity p_playerEntity);
+    String getPrefix(PlayerEntity p_playerEntity);
 }

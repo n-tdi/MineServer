@@ -17,7 +17,7 @@ public class GroupEntity {
     @DatabaseField(generatedId = true, columnName = "id")
     private int m_id;
 
-    @DatabaseField(columnName = "name", canBeNull = false)
+    @DatabaseField(columnName = "name", canBeNull = false, unique = true)
     private String m_name;
 
     @DatabaseField(columnName = "prefix", canBeNull = false)
